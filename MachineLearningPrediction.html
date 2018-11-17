@@ -166,7 +166,7 @@ boostFit &lt;- train(classe ~ ., data = training, method = &quot;gbm&quot;, trCo
 boostPred &lt;- predict(boostFit, newdata = testing)
 boostMatrix &lt;- confusionMatrix(testing$classe, boostPred)
 boostMatrix$overall[1]</code></pre>
-<p>At 96.2 percent, we see a very high level of accuracy for the gradient boosting method with very few misclassifications.</p>
+<p>At 96.2 percent, we see a very high level of accuracy for the gradient boosting method. The out of sample error is 3.8 percent, with very few misclassifications.</p>
 <p>Next we attempt the decision tree method:</p>
 <pre class="r"><code>set.seed(856)
 treeCtrl &lt;- trainControl(method = &quot;cv&quot;, number = 10)
@@ -175,7 +175,7 @@ treeFit &lt;- train(classe ~ ., data = training, method = &quot;rpart&quot;, trC
 treePred &lt;- predict(treeFit, newdata = testing)
 treeMatrix &lt;- confusionMatrix(testing$classe, treePred)
 treeMatrix$overall[1]</code></pre>
-<p>The decision tree yielded an accuracy of 50.4 percent, not very impressive at all. We can safely reject this method in favor of one of the other two.</p>
+<p>The decision tree yielded an accuracy of 50.4 percent, not very impressive at all. The out of sample error is 49.6 percent, meaning our classifications will be wrong roughly half the time. We can safely reject this method in favor of one of the other two.</p>
 <p>Finally, we attempt the random forest method.</p>
 <pre class="r"><code>set.seed(1233)
 forestCtrl &lt;- trainControl(method = &quot;cv&quot;, number = 10)
@@ -184,7 +184,7 @@ forestFit &lt;- train(classe ~ ., data = training, method = &quot;rf&quot;, trCo
 forestPred &lt;- predict(forestFit, newdata = testing)
 forestMatrix &lt;- confusionMatrix(testing$classe, forestPred)
 forestMatrix$overall[1]</code></pre>
-<p>We see that the random forest, though it took a long time to compute, yields the best accuracy of all at 99.5 percent. Out of 3923 samples, only 19 were classified incorrectly.</p>
+<p>We see that the random forest, though it took a long time to compute, yields the best accuracy of all at 99.5 percent. Out of 3923 samples, only 19 were classified incorrectly, giving us an out of sample error of only 0.5 percent, meaning our classifications will be correct almost all of the time.</p>
 <p>Testing the random forest method on the 20 samples from the test set provided in the assignment specifications, we find that all 20 samples were identified correctly. This further confirms the accuracy of the random forest approach.</p>
 </div>
 

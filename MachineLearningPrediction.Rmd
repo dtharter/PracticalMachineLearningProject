@@ -54,7 +54,7 @@ boostPred <- predict(boostFit, newdata = testing)
 boostMatrix <- confusionMatrix(testing$classe, boostPred)
 boostMatrix$overall[1]
 ```
-At 96.2 percent, we see a very high level of accuracy for the gradient boosting method with very few misclassifications.
+At 96.2 percent, we see a very high level of accuracy for the gradient boosting method.  The out of sample error is 3.8 percent, with very few misclassifications.
 
 Next we attempt the decision tree method:
 ```{r eval=FALSE}
@@ -66,7 +66,7 @@ treePred <- predict(treeFit, newdata = testing)
 treeMatrix <- confusionMatrix(testing$classe, treePred)
 treeMatrix$overall[1]
 ```
-The decision tree yielded an accuracy of 50.4 percent, not very impressive at all.  We can safely reject this method in favor of one of the other two.
+The decision tree yielded an accuracy of 50.4 percent, not very impressive at all.  The out of sample error is 49.6 percent, meaning our classifications will be wrong roughly half the time.  We can safely reject this method in favor of one of the other two.
 
 Finally, we attempt the random forest method.
 ```{r eval=FALSE}
@@ -78,6 +78,6 @@ forestPred <- predict(forestFit, newdata = testing)
 forestMatrix <- confusionMatrix(testing$classe, forestPred)
 forestMatrix$overall[1]
 ```
-We see that the random forest, though it took a long time to compute, yields the best accuracy of all at 99.5 percent.  Out of 3923 samples, only 19 were classified incorrectly.
+We see that the random forest, though it took a long time to compute, yields the best accuracy of all at 99.5 percent.  Out of 3923 samples, only 19 were classified incorrectly, giving us an out of sample error of only 0.5 percent, meaning our classifications will be correct almost all of the time.
 
 Testing the random forest method on the 20 samples from the test set provided in the assignment specifications, we find that all 20 samples were identified correctly.  This further confirms the accuracy of the random forest approach.
